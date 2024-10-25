@@ -1,68 +1,6 @@
 # Asset Compilation - Mix
 
-## Registration
-
 By default, any plugin or theme containing a `winter.mix.js` file at its root will be automatically registered. Registered items can be viewed with the `mix:list` command.
-
-The following sections document additional ways to configure a Mix package, these are only required if you need additional customization.
-
-### Registering plugins
-
-To register frontend assets to be compiled through Mix in your plugin, simply return an array with the package names as the keys and the package paths relative to the plugin's directory as the values to register from your [`Plugin.php`](../plugin/registration) registration file's `registerMixPackages()` method. See below example.
-
-```php
-public function registerMixPackages(): array
-{
-    return [
-        'custom-package-name' => 'assets/js/build.mix.js',
-    ];
-}
-```
-
-### Registering themes
-
-Registration of asset compilation of themes is even easier, and can be done by adding a `mix` definition to your [theme information file](../themes/development#theme-information-file) (`theme.yaml`).
-
-```yaml
-name: "Winter CMS Demo"
-description: "Demonstrates the basic concepts of the frontend theming."
-author: "Winter CMS"
-homepage: "https://wintercms.com"
-code: "demo"
-
-mix:
-    <name of package>: winter.mix.js
-```
-
-The `mix` definition takes any number of registered packages as a YAML object, with the key being the name of the package as a kebab-case string and the location of your `winter.mix.js` file relative to the theme's root directory.
-
-For example, if you want to register two packages called `demo-theme-style` and `demo-theme-shop` located in the assets folder, you would use the following definition:
-
-```yaml
-name: "Winter CMS Demo"
-description: "Demonstrates the basic concepts of the frontend theming."
-author: "Winter CMS"
-homepage: "https://wintercms.com"
-code: "demo"
-
-mix:
-    demo-theme-style: assets/style/winter.mix.js
-    demo-theme-shop: assets/shop/winter.mix.js
-```
-
-### Registering custom
-
-You can configure a custom mix package that sits outside of plugins and themes.
-
-```php
-use System\Classes\Asset\PackageManager;
-
-PackageManager::instance()->registerPackage(
-    name: 'my-custom-package',
-    path: '/path/to/winter.mix.js',
-    type: 'mix'
-);
-```
 
 <div id="automatic-configuration"></div>
 
@@ -170,3 +108,65 @@ php artisan mix:watch <package> [-f|--production] [-- <extra build options>]
 The `mix:watch` command is similar to the `mix:compile` command, except that it remains active and watches for any changes made to files that would be affected by your compilation. When any changes are made, a compile is automatically executed. This is useful for development in allowing you to quickly make changes and review them in your browser.
 
 With this command, only one package can be provided and watched at any one time.
+
+## Registration
+
+The following sections document additional ways to configure a Mix package, these are only required if you need additional customization.
+
+### Registering plugins
+
+To register frontend assets to be compiled through Mix in your plugin, simply return an array with the package names as the keys and the package paths relative to the plugin's directory as the values to register from your [`Plugin.php`](../plugin/registration) registration file's `registerMixPackages()` method. See below example.
+
+```php
+public function registerMixPackages(): array
+{
+    return [
+        'custom-package-name' => 'assets/js/build.mix.js',
+    ];
+}
+```
+
+### Registering themes
+
+Registration of asset compilation of themes is even easier, and can be done by adding a `mix` definition to your [theme information file](../themes/development#theme-information-file) (`theme.yaml`).
+
+```yaml
+name: "Winter CMS Demo"
+description: "Demonstrates the basic concepts of the frontend theming."
+author: "Winter CMS"
+homepage: "https://wintercms.com"
+code: "demo"
+
+mix:
+    <name of package>: winter.mix.js
+```
+
+The `mix` definition takes any number of registered packages as a YAML object, with the key being the name of the package as a kebab-case string and the location of your `winter.mix.js` file relative to the theme's root directory.
+
+For example, if you want to register two packages called `demo-theme-style` and `demo-theme-shop` located in the assets folder, you would use the following definition:
+
+```yaml
+name: "Winter CMS Demo"
+description: "Demonstrates the basic concepts of the frontend theming."
+author: "Winter CMS"
+homepage: "https://wintercms.com"
+code: "demo"
+
+mix:
+    demo-theme-style: assets/style/winter.mix.js
+    demo-theme-shop: assets/shop/winter.mix.js
+```
+
+### Registering custom
+
+You can configure a custom mix package that sits outside of plugins and themes.
+
+```php
+use System\Classes\Asset\PackageManager;
+
+PackageManager::instance()->registerPackage(
+    name: 'my-custom-package',
+    path: '/path/to/winter.mix.js',
+    type: 'mix'
+);
+```
