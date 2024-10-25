@@ -16,6 +16,7 @@ By default, the `mix:create` command will only generate the basic `winter.mix.js
 
 - `--tailwind` will configure your package for [tailwindcss](https://tailwindcss.com/)
 - `--vue`  will configure your package for [vue.js](https://vuejs.org/)
+- Other custom bundles can be [registered by third party plugins](asset-compilation#supported-toolset-bundles)
 
 For example, the following with configure the plugin `Acme.Example` with tailwind and create `plugins/acme/example/assets/src/acme-example.css` with a tailwind setup.
 
