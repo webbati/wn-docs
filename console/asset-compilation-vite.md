@@ -1,68 +1,6 @@
 # Asset Compilation - Vite
 
-## Registration
-
 By default, any plugin or theme containing a `vite.config.mjs` file at it's root will be automatically registered. Registered items can be viewed with the `vite:list` command.
-
-The following sections document additional ways to configure a Vite package, these are only required if you need additional customization.
-
-### Registering plugins
-
-To register frontend assets to be compiled through Vite in your plugin, simply return an array with the package names as the keys and the package paths relative to the plugin's directory as the values to register from your [`Plugin.php`](../plugin/registration) registration file's `registerVitePackages()` method. See below example.
-
-```php
-public function registerVitePackages()
-{
-    return [
-        'custom-package-name' => 'assets/js/build.vite.js',
-    ];
-}
-```
-
-### Registering themes
-
-Registration of asset compilation of themes is even easier, and can be done by adding a `vite` definition to your [theme information file](../themes/development#theme-information-file) (`theme.yaml`).
-
-```yaml
-name: "Winter CMS Demo"
-description: "Demonstrates the basic concepts of the frontend theming."
-author: "Winter CMS"
-homepage: "https://wintercms.com"
-code: "demo"
-
-vite:
-    <name of package>: vite.config.mjs
-```
-
-The `vite` definition takes any number of registered packages as a YAML object, with the key being the name of the package as a kebab-case string and the location of your `vite.config.mjs` file relative to the theme's root directory.
-
-For example, if you want to register two packages called `demo-theme-style` and `demo-theme-shop` located in the assets folder, you would use the following definition:
-
-```yaml
-name: "Winter CMS Demo"
-description: "Demonstrates the basic concepts of the frontend theming."
-author: "Winter CMS"
-homepage: "https://wintercms.com"
-code: "demo"
-
-vite:
-    demo-theme-style: assets/style/vite.config.mjs
-    demo-theme-shop: assets/shop/vite.config.mjs
-```
-
-### Registering custom
-
-You can configure a custom vite package that sits outside of plugins and themes.
-
-```php
-use System\Classes\Asset\PackageManager;
-
-PackageManager::instance()->registerPackage(
-    name: 'my-custom-package',
-    path: '/path/to/vite.config.mjs',
-    type: 'vite'
-);
-```
 
 <div id="automatic-configuration"></div>
 
@@ -86,46 +24,6 @@ php artisan vite:create acme.example --tailwind
 ```
 
 > **NOTE:** Winter will automatically pre-populate CSS/JS files with a basic setup of your chosen libraries. If you wish to only have the base configuration files generated then use the `--no-stubs` option.
-
-## Manual Vite configuration
-
-The Vite configuration file (`vite.config.mjs`) is a configuration file that manages the configuration of Laravel Vite itself. In conjunction with the `package.json` file that defines your dependencies, this file defines how Laravel Vite will compile your assets.
-
-For more information, you can review [the Laravel docs](https://laravel.com/docs/11.x/vite) or the [Vite docs](https://vitejs.dev/config/).
-
-Your `vite.config.mjs` file must include Vite as a requirement, and must also define the public path to the current directory, as follows:
-
-```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-
-export default defineConfig({
-    build: {
-        outDir: "assets/dist",
-    },
-    plugins: [
-        laravel({
-            publicDirectory: "assets/dist",
-            input: [
-                'assets/src/css/example.css',
-                'assets/src/js/example.js',
-            ],
-            refresh: {
-                paths: [
-                    './**/*.htm',
-                    './**/*.block',
-                    'assets/src/**/*.css',
-                    'assets/src/**/*.js',
-                ]
-            },
-        }),
-    ],
-});
-```
-
-### Paths
-
-When the `vite.config.mjs` file is evaluated, regardless of where you ran `vite:compile` from, the working directory is set to the parent directory of the `vite.config.mjs` file. That means that any relative paths used in the configuration will be relative to the current directory of the `vite.config.mjs` file.
 
 ## Vite vs. Mix
 
@@ -220,3 +118,105 @@ php artisan vite:watch <package> [-f|--production] [-- <extra build options>]
 The `vite:watch` command is similar to the `vite:compile` command, except that it remains active and watches for any changes made to files that would be affected by your compilation. When any changes are made, a compile is automatically executed. This is useful for development in allowing you to quickly make changes and review them in your browser.
 
 With this command, only one package can be provided and watched at any one time.
+
+## Manual Vite configuration
+
+The Vite configuration file (`vite.config.mjs`) is a configuration file that manages the configuration of Laravel Vite itself. In conjunction with the `package.json` file that defines your dependencies, this file defines how Laravel Vite will compile your assets.
+
+For more information, you can review [the Laravel docs](https://laravel.com/docs/11.x/vite) or the [Vite docs](https://vitejs.dev/config/).
+
+Your `vite.config.mjs` file must include Vite as a requirement, and must also define the public path to the current directory, as follows:
+
+```js
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+
+export default defineConfig({
+    build: {
+        outDir: "assets/dist",
+    },
+    plugins: [
+        laravel({
+            publicDirectory: "assets/dist",
+            input: [
+                'assets/src/css/example.css',
+                'assets/src/js/example.js',
+            ],
+            refresh: {
+                paths: [
+                    './**/*.htm',
+                    './**/*.block',
+                    'assets/src/**/*.css',
+                    'assets/src/**/*.js',
+                ]
+            },
+        }),
+    ],
+});
+```
+
+### Paths
+
+When the `vite.config.mjs` file is evaluated, regardless of where you ran `vite:compile` from, the working directory is set to the parent directory of the `vite.config.mjs` file. That means that any relative paths used in the configuration will be relative to the current directory of the `vite.config.mjs` file.
+
+## Registration
+
+The following sections document additional ways to configure a Vite package, these are only required if you need additional customization.
+
+### Registering plugins
+
+To register frontend assets to be compiled through Vite in your plugin, simply return an array with the package names as the keys and the package paths relative to the plugin's directory as the values to register from your [`Plugin.php`](../plugin/registration) registration file's `registerVitePackages()` method. See below example.
+
+```php
+public function registerVitePackages()
+{
+    return [
+        'custom-package-name' => 'assets/js/build.vite.js',
+    ];
+}
+```
+
+### Registering themes
+
+Registration of asset compilation of themes is even easier, and can be done by adding a `vite` definition to your [theme information file](../themes/development#theme-information-file) (`theme.yaml`).
+
+```yaml
+name: "Winter CMS Demo"
+description: "Demonstrates the basic concepts of the frontend theming."
+author: "Winter CMS"
+homepage: "https://wintercms.com"
+code: "demo"
+
+vite:
+    <name of package>: vite.config.mjs
+```
+
+The `vite` definition takes any number of registered packages as a YAML object, with the key being the name of the package as a kebab-case string and the location of your `vite.config.mjs` file relative to the theme's root directory.
+
+For example, if you want to register two packages called `demo-theme-style` and `demo-theme-shop` located in the assets folder, you would use the following definition:
+
+```yaml
+name: "Winter CMS Demo"
+description: "Demonstrates the basic concepts of the frontend theming."
+author: "Winter CMS"
+homepage: "https://wintercms.com"
+code: "demo"
+
+vite:
+    demo-theme-style: assets/style/vite.config.mjs
+    demo-theme-shop: assets/shop/vite.config.mjs
+```
+
+### Registering custom
+
+You can configure a custom vite package that sits outside of plugins and themes.
+
+```php
+use System\Classes\Asset\PackageManager;
+
+PackageManager::instance()->registerPackage(
+    name: 'my-custom-package',
+    path: '/path/to/vite.config.mjs',
+    type: 'vite'
+);
+```
