@@ -2,17 +2,22 @@
 
 ## Introduction
 
-Winter brings first-class support for handling Node-based compilation for frontend assets through the Mix commands. The commands use the [Laravel Mix](https://laravel-mix.com/) wrapper, a user-friendly and simple interface for setting up compilation of multiple types of frontend assets through Webpack and various libraries.
+Winter brings first-class support for handling Node-based compilation for frontend assets through the [Mix](asset-compilation-mix) & [Vite](asset-compilation-vite) commands.
+
+Simply use one of the following commands to get started (`<package name>` refers to either a plugin code (i.e. `Winter.Blog`) or a theme code (i.e. `my-theme`)):
+
+- [`php artisan mix:create <package name>`](asset-compilation-mix#automatic-mix-configuration)
+- [`php artisan vite:create <package name>`](asset-compilation-vite#automatic-vite-configuration)
 
 ### Requirements
 
-To take advantage of Mix asset compilation, you must have Node and the Node package manager (NPM) installed in your development environment. This will be dependent on your operating system - please review the [Download NodeJS](https://nodejs.org/en/download/) page for more information on installing Node.
+To take advantage of the CLI asset compilation options, you must have Node and the Node package manager (NPM) installed in your development environment. This will be dependent on your operating system - please review the [Download NodeJS](https://nodejs.org/en/download/) page for more information on installing Node.
 
-[Laravel Mix](https://laravel-mix.com/) should also be present in the `package.json` file for any packages that will be using it (either in `dependencies` or a `devDependencies`) but if it is not specified in the project's `package.json` file then it can be optionally automatically added when running the [`mix:install`](#install-node-dependencies) command.
+To make use of Mix, [Laravel Mix](https://laravel-mix.com/) should also be present in the `package.json` file for any packages that will be using it (either in `dependencies` or a `devDependencies`) but if it is not specified in the project's `package.json` file then it can be optionally automatically added when running the [`mix:install`](#install-node-dependencies) command.
 
 ## Registering a package
 
-Registering for asset compilation through Mix is very easy. Automatic registration should meet your needs most of the time, and if not there are several methods available to manually register Mix packages.
+Registering for asset compilation through Mix or Vite is very easy. Automatic registration should meet your needs most of the time, and if not there are several methods available to manually register Mix packages.
 
 ### Automatic registration
 
@@ -94,7 +99,7 @@ BundleManager::instance()->registerCallback(function (BundleManager $manager) {
 Once a custom bundle has been registered, it will be accessible via the `[vite|mix]:create` command as an option flag. I.e. with the above:
 
 ```bash
-php artisan vite:config Acme.Plugin --winterjs
+php artisan vite:create Acme.Plugin --winterjs
 ```
 
 The above can also be used to modify the versions of packages to install, e.g.
