@@ -117,6 +117,7 @@ sections:
             console/asset-compilation: "Asset Compilation"
             console/asset-compilation-mix: "Asset Compilation (Mix)"
             console/asset-compilation-vite: "Asset Compilation (Vite)"
+            console/asset-node-utilities: "Asset Compilation - Node Utilities"
             console/scaffolding: "Scaffolding"
             console/utilities: "Utilities"
 
