@@ -5,10 +5,13 @@ The following commands allow you to quickly scaffold additional code into your W
 ## Create a theme
 
 ```bash
-php artisan create:theme <theme code>
+php artisan create:theme <theme code> [scaffold]
 ```
 
-The `create:theme` command generates a theme folder and basic files for the theme. The first argument specifies the theme code, eg. `myauthor-mytheme`.
+The `create:theme` command generates a theme folder and basic files for the theme. The first argument specifies the theme code, eg. `myauthor-mytheme`. The second argument (`[scaffold]`) is optional and allows you to choose a base theme to start from:
+
+- `tailwind`: (default) Creates an empty theme using [TailwindCSS](https://tailwindcss.com/) and [Vite](../console/asset-compilation-vite)
+- `less`: Creates an empty theme using LESS and the [Asset Compiler](../services/asset-compilation)
 
 ## Create a plugin
 
