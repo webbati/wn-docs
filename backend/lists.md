@@ -73,6 +73,7 @@ Option | Description
 `showCheckboxes` | displays checkboxes next to each record. Default: `false`.
 `showSetup` | displays the list column set up button. Default: `false`.
 `showTree` | displays a tree hierarchy for parent/child records. Default: `false`.
+`showTotals` | displays the summed values for the columns in the form of `totalOnPage (totalForQuery)` in the list header and footer. Default: `true`.
 `treeExpanded` | if tree nodes should be expanded by default. Default: `false`.
 `customViewPath` | specify a custom view path to override partials used by the list, optional.
 
@@ -161,6 +162,7 @@ Option | Description
 `searchable` | include this column in the list search results. Default: `false`.
 `invisible` | specifies if this column is hidden by default. Default: `false`.
 `sortable` | specifies if this column can be sorted. Default: `true`.
+`summable` | specifies if this column can be summed (requires column to be of `type: number`). Default: `true`.
 `clickable` | if set to false, disables the default click behavior when the column is clicked. Default: `true`.
 `select` | defines a custom SQL select statement to use for the value.
 `valueFrom` | defines a model attribute to use for the value.
