@@ -145,6 +145,7 @@ public function registerSettings(): array
     ];
 }
 ```
+
 #### Properties
 
 The optional `category` parameter is used by the backend settings page to organize links. If a category is not provided, the new link will be added to the `Misc` category.  
