@@ -4,7 +4,7 @@
 
 [Vite](https://vite.dev/) is a modern frontend build tool that provides an extremely fast development environment and bundles your code for production. When building applications with Winter CMS, you will typically use Vite to bundle your application's CSS and JavaScript files into production ready assets.
 
-Winter integrates seamlessly with Vite by providing several console commands ([`vite:create`](#automatic-vite-configuration), [`vite:install`](#install-node-dependencies), [`vite:list`](#list-registered-vite-packages), [`vite:compile`](#compile-a-vite-packages), and [`vite:watch`](#watch-a-vite-package)) for development and [helper functions](#loading-vite-assets) for loading your assets for development and production.
+Winter integrates seamlessly with Vite by integrating support for [Laravel's integration](https://laravel.com/docs/11.x/vite) and providing several console commands ([`vite:create`](#automatic-vite-configuration), [`vite:install`](#install-node-dependencies), [`vite:list`](#list-registered-vite-packages), [`vite:compile`](#compile-a-vite-packages), and [`vite:watch`](#watch-a-vite-package)) for development and [helper functions](#loading-vite-assets) for loading your assets for development and production.
 
 By default, any plugin or theme containing a `vite.config.mjs` file at it's root will be automatically registered. Registered items can be viewed with the `vite:list` command.
 
