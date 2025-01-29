@@ -2,7 +2,7 @@
 
 ## Introduction
 
-[Laravel Mix](https://laravel-mix.com/) provides a fluent API for defining webpack build steps for your Winter CMS application using several common CSS and JavaScript pre-processors.
+[Laravel Mix](https://laravel-mix.com/) provides a fluent API for defining [webpack](https://webpack.js.org/) build steps for your Winter CMS application using several common CSS and JavaScript pre-processors.
 
 In other words, Mix makes it a cinch to compile and minify your application's CSS and JavaScript files. Through simple method chaining, you can fluently define your asset pipeline. For example:
 
