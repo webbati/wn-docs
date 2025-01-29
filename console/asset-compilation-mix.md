@@ -1,5 +1,20 @@
 # Asset Compilation - Mix
 
+## Introduction
+
+[Laravel Mix](https://laravel-mix.com/) provides a fluent API for defining webpack build steps for your Winter CMS application using several common CSS and JavaScript pre-processors.
+
+In other words, Mix makes it a cinch to compile and minify your application's CSS and JavaScript files. Through simple method chaining, you can fluently define your asset pipeline. For example:
+
+```js
+mix.js('resources/js/app.js', 'public/js')
+    .postCss('resources/css/app.css', 'public/css');
+```
+
+If you've ever been confused and overwhelmed about getting started with webpack and asset compilation, you will love Laravel Mix. However, you are not required to use it while developing your application; you are free to use any asset pipeline tool you wish, or even none at all.
+
+Winter integrates seamlessly with Mix by integrating support for [Laravel's integration](https://laravel.com/docs/8.x/mix) and providing several console commands ([`mix:create`](#automatic-mix-configuration), [`mix:install`](#install-node-dependencies), [`mix:list`](#list-registered-mix-packages), [`mix:compile`](#compile-a-mix-packages), and [`mix:watch`](#watch-a-mix-package)) for development.
+
 By default, any plugin or theme containing a `winter.mix.js` file at its root will be automatically registered. Registered items can be viewed with the `mix:list` command.
 
 <div id="automatic-configuration"></div>
