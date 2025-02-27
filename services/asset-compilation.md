@@ -10,7 +10,7 @@ Winter CMS includes a server-side Asset Compiler that makes use of the [Assetic 
 
 Additionally, you can [define variables in the theme.yaml file](../themes/development#asset-compiler-variables) that can be modified in the Theme Settings area of the backend which are then injected into the compiled files, creating flexibility for theming and branding.
 
-> **NOTE:** Looking for a way to compile or build Node-based assets in your project? Check out the [Winter Mix](../console/asset-compilation) functionality which can handle this for you.
+> **NOTE:** Looking for a way to compile or build Node-based assets in your project? Check out the [Winter Mix / Vite / NPM](../console/asset-compilation) functionality which can handle this for you.
 
 ## Injecting Page Assets
 
