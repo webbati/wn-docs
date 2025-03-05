@@ -1376,7 +1376,7 @@ status:
 Supplying the dropdown options to the model class:
 
 ```php
-public function listStatuses($fieldName, $value, $formData)
+public function listStatuses(string $value, string $fieldName, array|Model $formData)
 {
     return ['published' => 'Published', ...];
 }
