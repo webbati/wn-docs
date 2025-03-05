@@ -303,6 +303,76 @@ gender:
 
 See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
+### Button
+
+`button` - renders a single [button](../../ui/controls/button). Supports triggering an [AJAX request](../ajax/introduction), acting as a link to a URL, or [opening a popup](../../ui/controls/popup#remote-popups).
+
+The `action` of the button (`button`, `link`, or `popup`) is determined by the configuration of the button. If the value of the field is a valid URL, or the `href` property is set, then it will be a `link` action. If a `handler` property is set, it will be a `popup` action. All other cases will result in the `button` action.
+
+```yaml
+button:
+    type: button
+    buttonLabel: # The label of the button itself.
+    buttonType: # default | primary | success | info | warning | danger | link
+    path: # Use a custom partial to render the button
+    handler: # popup action only
+    href: # link action only
+    target: # link action only
+    request: # button action only
+    loading: # message to display while waiting for the request
+    icon: 'icon-pencil'
+```
+
+The partial used to render the partial can be manually specified by providing the `path` property, the same as a [`partial`](#partial) field. This partial will receive the same variables as a regular `partial` field, with the addition of the following variables:
+
+Variable | Description
+------------- | -------------
+`$action` | The action of the button. One of `button`, `link`, `popup`.
+`$element` | The HTML element recommended to use for the button. Either `a` or `button`.
+`$label` | The label of the button itself.
+`$buttonType` | The type of button to render. One of `default`, `primary`, `success`, `info`, `warning`, `danger`, `link`.
+`$classes` | The CSS classes that should be applied to the button element.
+`$handler` | The popup AJAX handler.
+`$request` | The AJAX request to send when the button is clicked.
+`$href` | The URL to link to for a `link` action button.
+`$target` | The `target` attribute for the `link` action button.
+`$loading` | The loading message to display when the button has been clicked. Populates the `data-load-indicator` attribute on the button element.
+`$icon` | The [icon class](../../ui/style/icon) to use for the icon element inside the button.
+
+#### Examples:
+
+Simple button with AJAX request:
+```yaml
+_sync_ics:
+    label: Actions
+    buttonLabel: Sync
+    type: button
+    request: onSyncICS
+    icon: 'icon-rotate'
+    loading: Syncing...
+```
+
+Simple Link button:
+```yaml
+places_url:
+    type: button
+    buttonType: primary
+    buttonLabel: View on Google Maps
+    icon: icon-map-location-dot
+    target: _blank
+```
+
+Button triggering popup:
+```yaml
+_btn_autofill:
+    label: Autofill
+    buttonLabel: Autofill Club Information
+    type: button
+    handler: onRenderAutofillPopup
+    buttonType: primary
+    icon: icon-map-location-dot
+```
+
 ### Checkbox
 
 `checkbox` - renders a single checkbox.
