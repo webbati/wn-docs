@@ -188,7 +188,7 @@ The following features are enabled when debug mode is enabled:
 
 The safe mode setting is found in the `config/cms.php` configuration file with the `enableSafeMode` parameter. The default value is `null`.
 
-If safe mode is enabled, the PHP code section is disabled in CMS templates for security reasons. If set to `null`, safe mode is on when [debug mode](#debug-mode) is disabled.
+If safe mode is enabled, editing the PHP code section is disabled in CMS templates for security reasons. If set to `null`, safe mode is on when [debug mode](#debug-mode) is disabled.
 
 ### CSRF protection
 
