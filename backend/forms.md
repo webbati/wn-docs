@@ -339,9 +339,10 @@ Variable | Description
 `$loading` | The loading message to display when the button has been clicked. Populates the `data-load-indicator` attribute on the button element.
 `$icon` | The [icon class](../../ui/style/icon) to use for the icon element inside the button.
 
-#### Examples:
+#### Examples
 
 Simple button with AJAX request:
+
 ```yaml
 _sync_ics:
     label: Actions
@@ -353,6 +354,7 @@ _sync_ics:
 ```
 
 Simple Link button:
+
 ```yaml
 places_url:
     type: button
@@ -363,6 +365,7 @@ places_url:
 ```
 
 Button triggering popup:
+
 ```yaml
 _btn_autofill:
     label: Autofill
