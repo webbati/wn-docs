@@ -57,6 +57,14 @@ php artisan create:model <plugin code> <model name>
 
 The `create:model` command generates the files needed for a new model. The first argument specifies the plugin code of the plugin that this model will be added into, and the second parameter specifies the model class name, eg. `MyModel`.
 
+## Create a factory
+
+```bash
+php artisan create:factory <plugin code> <factory name> --model=Post
+```
+
+The `create:factory` command generates a [Model Factory](https://laravel.com/docs/9.x/eloquent-factories#introduction) in the plugin's `database/factories` folder. The first argument specifies the plugin code of the plugin that this factory will be added into, and the second parameter specifies the name of the Factory class to generate. The `--m|model` option specifies the model that will be targeted by the factory, eg. `MyModel`.
+
 ## Create a settings model
 
 ```bash
