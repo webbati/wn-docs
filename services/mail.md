@@ -482,4 +482,3 @@ Mail::assertSent('this.is.my.email', function ($mail) {
 ```
 
 >**NOTE:** Laravel does not support rendering the mail when using the fake mailer so it is necessary to test the contents of the sent email in another way. See https://github.com/laravel/framework/issues/24005.
-
