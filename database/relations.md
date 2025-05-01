@@ -711,7 +711,6 @@ public function posts(): HasManyThrough
 }
 ```
 
-
 ### Has One Through
 
 The `hasOneThrough` relationship links models through a single intermediate relation. For example, if each supplier has one user, and each user is associated with one user history record, then the supplier model may access the user's history through the user. Let's look at the database tables necessary to define this relationship:
