@@ -711,9 +711,10 @@ public function posts(): HasManyThrough
 }
 ```
 
+
 ### Has One Through
 
-The has-one-through relationship links models through a single intermediate relation. For example, if each supplier has one user, and each user is associated with one user history record, then the supplier model may access the user's history through the user. Let's look at the database tables necessary to define this relationship:
+The `hasOneThrough` relationship links models through a single intermediate relation. For example, if each supplier has one user, and each user is associated with one user history record, then the supplier model may access the user's history through the user. Let's look at the database tables necessary to define this relationship:
 
 ```
 users
@@ -751,7 +752,13 @@ class Supplier extends Model
 
 The first array parameter passed to the `$hasOneThrough` property is the name of the final model we wish to access, while the `through` key is the name of the intermediate model.
 
-Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key`, `otherKey` and `throughKey` parameters to the `$hasOneThrough` definition. The `key` parameter is the name of the foreign key on the intermediate model, the `throughKey` parameter is the name of the foreign key on the final model, while the `otherKey` is the local key.
+Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key`, `otherKey`, `throughKey`, and `secondOtherKey` parameters to the `$hasOneThrough` definition.
+
+- `key`: The name of the foreign key on the intermediate model that links to the parent model.
+- `through`: The intermediate model class name.
+- `throughKey`: The name of the foreign key on the final model that links to the intermediate model.
+- `otherKey`: The local key on the parent model.
+- `secondOtherKey`: The local key on the intermediate model that should be matched against the final model. This is useful when the join to the final model does not use the intermediate model’s primary key.
 
 ```php
 // Property style
@@ -759,7 +766,7 @@ public $hasOneThrough = [
     'userHistory' => [
         'Acme\Supplies\Model\History',
         'key'        => 'supplier_id',
-        'through' => 'Acme\Supplies\Model\User',
+        'through'    => 'Acme\Supplies\Model\User',
         'throughKey' => 'user_id',
         'otherKey'   => 'id'
     ],
@@ -771,6 +778,50 @@ public function userHistory(): HasOneThrough
     return $this->hasOneThrough('Acme\Supplies\Model\History', 'Acme\Supplies\Model\User', 'supplier_id', 'user_id', 'id');
 }
 ```
+
+#### Using `secondOtherKey`
+
+Consider the following table structure:
+
+```
+departments
+    id - integer
+    code - string
+
+employees
+    id - integer
+    department_code - string
+
+records
+    id - integer
+    employee_id - integer
+```
+
+In this case, each department has many employees identified by a `department_code`, and each employee has one record. To define a `hasOneThrough` relationship from a department to a record through the employee, where the join to `employees` uses `department_code` rather than the default `id`, use the `secondOtherKey`:
+
+```php
+public $hasOneThrough = [
+    'record' => [
+        'App\Models\Record',
+        'key' => 'id',
+        'through' => 'App\Models\Employee',
+        'throughKey' => 'employee_id',
+        'otherKey' => 'code',
+        'secondOtherKey' => 'department_code',
+    ],
+];
+```
+
+This results in a query that joins `employees` to `records` using `employee_id`, and joins `departments.code` to `employees.department_code` instead of using the default `id`.
+
+```sql
+select `records`.*
+from `records`
+inner join `employees` on `employees`.`id` = `records`.`employee_id`
+where `employees`.`department_code` = `departments`.`code`
+```
+
+This setup is useful in cases where intermediate relationships are keyed using non-standard or business-specific identifiers instead of primary keys.
 
 ### Polymorphic relations
 
