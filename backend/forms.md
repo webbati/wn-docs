@@ -681,6 +681,45 @@ blog_contents:
     size: large
 ```
 
+### URL
+
+`url` – renders a single-line input for URL values with built-in browser validation.
+
+```yaml
+website:
+    label: Website
+    type: url
+    placeholder: https://example.com
+    required: true
+    maxlength: 2048
+    pattern: https://.*
+    size: 50
+    options:
+        https://wintercms.com: Winter CMS
+        https://laravel.com: Laravel
+```
+
+- Displays a link icon on the left in both edit and preview modes.
+- In preview mode, renders as a clickable link that opens in a new tab.
+- Supports all standard HTML5 attributes for `<input type="url">`:
+  - `placeholder`, `maxlength`, `minlength`, `pattern`, `size`, `list`, `autocomplete`, `required`, `readonly`, `disabled`
+- `options` will be rendered in a `<datalist>` element, enabling autocomplete suggestions.
+- If an option's value and label are identical, the label is omitted for brevity.
+
+See [Defining field options](#defining-field-options) for the different methods to specify the options.
+
+#### Server-side validation
+
+To validate this field on save, define a validation rule in your model:
+
+```php
+public $rules = [
+    'website' => 'nullable|url|max:2048',
+];
+```
+
+> **Tip:** Use `nullable` if the field is not required but must still be a valid URL when provided.
+
 ### Widget
 
 `widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
@@ -950,7 +989,7 @@ Option | Description
 
 > **NOTE:** Unlike the [Media Finder FormWidget](#media-finder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
 
-By default, the File Upload FormWidget only allows a limited set of file extensions. You can extend this list by adding a `fileDefinitions` config in `config/cms.php` file.  
+By default, the File Upload FormWidget only allows a limited set of file extensions. You can extend this list by adding a `fileDefinitions` config in `config/cms.php` file.
 See [Allowed file types](../setup/configuration#allowed-file-types) for more information.
 
 ### Icon Picker
