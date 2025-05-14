@@ -702,7 +702,7 @@ website:
 - Displays a link icon on the left in both edit and preview modes.
 - In preview mode, renders as a clickable link that opens in a new tab.
 - Supports all standard HTML5 attributes for `<input type="url">`:
-  - `placeholder`, `maxlength`, `minlength`, `pattern`, `size`, `list`, `autocomplete`, `required`, `readonly`, `disabled`
+    - `placeholder`, `maxlength`, `minlength`, `pattern`, `size`, `list`, `autocomplete`, `required`, `readonly`, `disabled`
 - `options` will be rendered in a `<datalist>` element, enabling autocomplete suggestions.
 - If an option's value and label are identical, the label is omitted for brevity.
 
