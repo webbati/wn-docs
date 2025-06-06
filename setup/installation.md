@@ -16,7 +16,7 @@ Before you proceed, check that your server meets the minimum system requirements
 
 Winter CMS has some server requirements for web hosting:
 
-- PHP version 8.0 or above. (we recommend at least PHP 8.1)
+- PHP version 8.1 or above. (we recommend at least PHP 8.2)
 - The following PHP extensions installed and enabled:
     - cURL
     - GD
