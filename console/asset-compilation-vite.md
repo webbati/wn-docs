@@ -146,6 +146,8 @@ The `vite:watch` command is similar to the `vite:compile` command, except that i
 
 With this command, only one package can be provided and watched at any one time.
 
+>**NOTE:** You may need to disable your adblocker when using `vite:watch` as it uses hot reloading for the asset files and loads them directly from a separate port on your machine, which some adblock extensions do not like.
+
 ## Manual Vite configuration
 
 The Vite configuration file (`vite.config.mjs`) is a configuration file that manages the configuration of Laravel Vite itself. In conjunction with the `package.json` file that defines your dependencies, this file defines how Laravel Vite will compile your assets.
